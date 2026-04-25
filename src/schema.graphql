@@ -3,7 +3,15 @@ type User {
     name: String!
     email: String!
     password: String!
-    age: Int
+    links: [Link!]!
+}
+
+type Link {
+    id: ID!
+    title: String!
+    url: String!
+    description: String!
+    postedBy: User
 }
 
 type AuthPayload {
@@ -15,6 +23,7 @@ type Query {
     hello: String
     usersGet: [User!]!
     userGet(id: ID!): User
+    links: [Link]!
 }
 
 type Mutation {
