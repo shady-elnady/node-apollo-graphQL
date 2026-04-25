@@ -5,15 +5,14 @@ const APP_SECRET = "app_secret";
 
 
 const signup = async (parent, args, { prisma }) => {
-    const { name, email, password, age } = args;
-    const hashedPassword = bcrypt.hash(password, 10);
+    const { name, email, password } = args;
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     let newUser = await prisma.user.create({
         data: {
             name,
             email,
             password: hashedPassword,
-            age,
         }
     });
     const token = jwt.sign({ userId: newUser.id }, APP_SECRET);

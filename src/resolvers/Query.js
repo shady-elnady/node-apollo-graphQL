@@ -1,6 +1,9 @@
 const Query = {
     hello: () => "Hello from Apollo",
-    usersGet: async (parent, args, { prisma }) => await prisma.user.findMany(),
+    usersGet: async (parent, args, { prisma, userId }) => {
+        console.log("userId", userId);
+        return await prisma.user.findMany();
+    },
     userGet: async (parent, { id }, { prisma }) => {
         return await prisma.user.finUnique({ where: { id: id } });
     },
